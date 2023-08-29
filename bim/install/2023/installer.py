@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
 import getpass
-from bim.utils.logging import installer_logger, fileio_logger
+from bim.utils.logging import installer_logger, fileio_logger, maya_logger
 from bim.utils.registry import Registry
+import maya.cmds as cmds
+import maya.mel as mel
 
 env_dir = f"C:/Users/{getpass.getuser()}/PycharmProjects"
 
@@ -36,17 +38,29 @@ scripts: {mod_dir}"""
     Registry.set_value("Software", "MBIM", "Pref_MayaModuleFolder", maya_mod_dir)
     Registry.set_value("Software", "MBIM", "Pref_MayaModuleFile", maya_mod_file)
 
+    if not cmds.layout("MBIM", exists=True):
+        maya_logger.info("Creating MBIM shelf tab")
+        mel.eval('addNewShelfTab("MBIM");')
 
-def uninstall():
-    try:
-        fileio_logger.info(f"Removing module file: {maya_mod_file}")
-        os.remove(maya_mod_file)
+    command = """from mbim import gui
+    gui.show()"""
 
-    except WindowsError:
-        fileio_logger.error(f"MBIM module file does not exist.")
+    icon_path = "/execute.png"
 
-    installer_logger.info("Removing MBIM preferences")
-    Registry.delete_subkey("Software", "MBIM")
+    shelf_mbim = cmds.shelfLayout("MBIM", query=True, childArray=True)
+    if shelf_mbim:
+        maya_logger.info("Clearing MBIM shelf buttons")
+        for button in shelf_mbim:
+            cmds.deleteUI(button, control=True)
+
+    maya_logger.info("Creating MBIM shelf button")
+    cmds.shelfButton(
+        annotation="Run",
+        image1=icon_path,
+        command=command,
+        parent="MBIM",
+        label="run",
+    )
 
 
 if __name__ == "__main__":
