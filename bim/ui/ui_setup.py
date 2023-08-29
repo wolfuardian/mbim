@@ -8,7 +8,7 @@ class Setup(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidgetBaseMixin, 
     def __init__(self, parent=tools.Maya.get_main_window()):
         super(Setup, self).__init__(parent)
 
-        self.setWindowTitle("MaBIM-v230618")
+        self.setWindowTitle("MBIM-2308-0000")
         self.setMinimumWidth(360)
 
         layout = qt.QtWidgets.QVBoxLayout()
