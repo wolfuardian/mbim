@@ -1,3 +1,3 @@
 import pymel.core as pm
 
-pm.evalDeferred('import *')
+pm.evalDeferred("import *")
