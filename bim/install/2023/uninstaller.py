@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 import getpass
-from bim.utils.logging import installer_logger, fileio_logger, maya_logger
-from bim.utils.registry import Registry
 import maya.cmds as cmds
+
+import bim.tools as tools
 
 env_dir = f"C:/Users/{getpass.getuser()}/PycharmProjects"
 
@@ -18,16 +18,16 @@ maya_mod_file = f"{maya_mod_dir}/{mod}.mod"
 
 def uninstall():
     try:
-        fileio_logger.info(f"Removing module file: {maya_mod_file}")
+        tools.Logging.fileio_logger().info(f"Removing module file: {maya_mod_file}")
         os.remove(maya_mod_file)
 
     except WindowsError:
-        fileio_logger.error(f"MBIM module file does not exist.")
+        tools.Logging.fileio_logger().error(f"MBIM module file does not exist.")
 
-    installer_logger.info("Removing MBIM preferences")
-    Registry.delete_subkey("Software", "MBIM")
+    tools.Logging.installer_logger().info("Removing MBIM preferences")
+    tools.Registry.delete_subkey("Software", "MBIM")
 
-    maya_logger.info("Removing MBIM shelf tab and button")
+    tools.Logging.maya_logger().info("Removing MBIM shelf tab and button")
     shelf_buttons = cmds.shelfLayout("MBIM", query=True, childArray=True)
     if shelf_buttons:
         for button in shelf_buttons:

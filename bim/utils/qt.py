@@ -1,5 +1,5 @@
 from PySide2 import QtWidgets, QtCore, QtGui
-from bim.utils.registry import Registry
+from bim.tools.registry import Registry
 
 
 class QtFonts:
