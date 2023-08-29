@@ -1,5 +1,5 @@
-import importlib
 import sys
+import importlib
 
 import bim.core.tools as core
 import bim.tools as tools
