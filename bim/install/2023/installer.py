@@ -42,8 +42,8 @@ scripts: {mod_dir}"""
         maya_logger.info("Creating MBIM shelf tab")
         mel.eval('addNewShelfTab("MBIM");')
 
-    command = """from mbim import gui
-    gui.show()"""
+    command = """from bim import gui
+gui.show()"""
 
     icon_path = "/execute.png"
 
