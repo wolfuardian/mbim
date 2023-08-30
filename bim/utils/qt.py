@@ -352,6 +352,10 @@ class QtFrameLayoutCSWidget(QtDefaultCSWidget):
         for item in self.__frame.findChildren(QtWidgets.QWidget):
             item.setVisible(getattr(item, "force_visible", True))
 
+    def set_text(self, text):
+        """Set the text of _FrameButton"""
+        self.__frame_btn.setText(text)
+
 
 class QtFrameButtonCSWidget(QtDefaultCSWidget):
     """
