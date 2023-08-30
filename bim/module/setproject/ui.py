@@ -3,24 +3,29 @@ from bim.utils import qt
 
 # from . import operator, prop, store
 
+def _hex(h):
+    return "#" + h
 
 class SetProjectDirectoryCSWidget(qt.QtFrameLayoutCSWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.set_text("專案目錄")
+    def __init__(self, parent=None, text="專案目錄"):
+        super().__init__(parent, text)
 
         # <editor-fold desc="CODE_BLOCK: Initialize">
         widget = qt.QtDefaultCSWidget()
         layout = QtWidgets.QVBoxLayout()
-        layout.setContentsMargins(0, 8, 0, 8)
+        layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(6)
         # </editor-fold>
 
         # <editor-fold desc="CODE_BLOCK: Create Widget">
-        scrollarea = qt.QtScrollareaCSWidget(margin=(12, 12, 12, 12), spacing=12)
+        scrollarea = qt.QtScrollareaCSWidget(margin=(0, 0, 0, 0), spacing=6)
+
         box_sel_mats = qt.QtGroupVBoxCSWidget(
             text="選取材質球", margin=(6, 24, 6, 6), spacing=6
         )
+
+
+        # box_sel_mats
         box_sel_mats_in_scene = qt.QtGroupHBoxCSWidget(
             text="在場景中", margin=(6, 24, 6, 6), spacing=6
         )
@@ -35,7 +40,7 @@ class SetProjectDirectoryCSWidget(qt.QtFrameLayoutCSWidget):
         # </editor-fold>
 
         # <editor-fold desc="CODE_BLOCK: Tooltip">
-        # btn_sel_mats_in_scene.setToolTip("❓ 選取場景中所有材質球\n除了lambert1、standardSurface1、particleCloud1")
+        box_sel_mats.setToolTip("💡 選取場景中所有材質球，除了lambert1、standardSurface1、particleCloud1")
         # </editor-fold>
 
         # <editor-fold desc="CODE_BLOCK: Connect Action">
@@ -43,9 +48,8 @@ class SetProjectDirectoryCSWidget(qt.QtFrameLayoutCSWidget):
         # </editor-fold>
 
         # <editor-fold desc="CODE_BLOCK: Assembly Widget">
-        box_sel_mats_in_scene.layout.addWidget(btn_sel_mats_in_scene)
-        box_sel_mats_in_scene.layout.addWidget(btn_cancel_sel_mats)
         scrollarea.layout.addWidget(box_sel_mats)
+        scrollarea.layout.addWidget(box_sel_mats_in_scene)
         layout.addWidget(scrollarea)
         widget.setLayout(layout)
         self.frame_layout.addWidget(widget)
