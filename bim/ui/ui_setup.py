@@ -7,7 +7,7 @@ import bim.module as module
 class Setup(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidgetBaseMixin, qt.QtDefaultCSWidget):
     def __init__(self, parent=tools.Maya.get_main_window()):
         super(Setup, self).__init__(parent)
-        self.setWindowTitle("MBIM-2308-0001")
+        self.setWindowTitle("MBIM-2308-0002")
         self.setMinimumWidth(360)
 
 
@@ -30,12 +30,8 @@ class Setup(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidgetBaseMixin, 
         tab_save = qt.QtTabItemCSWidget()
 
         frame_set_project_directory_widget = module.SetProjectDirectoryCSWidget()
-        frame_set_project_directory_widget2 = module.SetProjectDirectoryCSWidget()
-
-
 
         tab_load.layout.addWidget(frame_set_project_directory_widget)
-        tab_load.layout.addWidget(frame_set_project_directory_widget2)
 
 
         # </editor-fold>
@@ -64,6 +60,5 @@ class Setup(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidgetBaseMixin, 
 
         self.frame_widgets = [
             frame_set_project_directory_widget,
-            frame_set_project_directory_widget2
         ]
         # </editor-fold>

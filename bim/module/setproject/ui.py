@@ -3,8 +3,10 @@ from bim.utils import qt
 
 # from . import operator, prop, store
 
+
 def _hex(h):
     return "#" + h
+
 
 class SetProjectDirectoryCSWidget(qt.QtFrameLayoutCSWidget):
     def __init__(self, parent=None, text="專案目錄"):
@@ -18,29 +20,24 @@ class SetProjectDirectoryCSWidget(qt.QtFrameLayoutCSWidget):
         # </editor-fold>
 
         # <editor-fold desc="CODE_BLOCK: Create Widget">
-        scrollarea = qt.QtScrollareaCSWidget(margin=(0, 0, 0, 0), spacing=6)
+        scrollarea = qt.QtScrollareaCSWidget()
 
-        box_sel_mats = qt.QtGroupVBoxCSWidget(
-            text="選取材質球", margin=(6, 24, 6, 6), spacing=6
-        )
+        gbox_p_dir = qt.QtGroupHBoxCSWidget(text="專案目錄")
+        tl_p_dir = qt.QtTextLineCSWidget(text="", placeholder="> 專案目錄路徑")
+        tl_p_dir.lineedit.setReadOnly(True)
+        btn_p_dir = qt.QtButtonCSWidget(text="< 開啟")
 
-
-        # box_sel_mats
-        box_sel_mats_in_scene = qt.QtGroupHBoxCSWidget(
-            text="在場景中", margin=(6, 24, 6, 6), spacing=6
-        )
-        btn_sel_mats_in_scene = qt.QtButtonCSWidget(text="選取所有", height=24)
-        btn_cancel_sel_mats = qt.QtButtonCSWidget(
-            text="", icon="783_multiply_delete.svg", width=24, height=24
-        )
+        gbox_m_dir = qt.QtGroupHBoxCSWidget(text="模型檔目錄")
+        tl_m_dir = qt.QtTextLineCSWidget(text="", placeholder="> 模型檔目錄路徑")
+        tl_m_dir.lineedit.setReadOnly(True)
+        btn_m_dir = qt.QtButtonCSWidget(text="< 開啟")
         # </editor-fold>
 
         # <editor-fold desc="CODE_BLOCK: Set Status">
-        # box_sel_mats_in_scene.set_status(qt.QtGroupBoxStatus.Borderless_Invert)
         # </editor-fold>
 
         # <editor-fold desc="CODE_BLOCK: Tooltip">
-        box_sel_mats.setToolTip("💡 選取場景中所有材質球，除了lambert1、standardSurface1、particleCloud1")
+        gbox_p_dir.setToolTip("💡 選取場景中所有材質球，除了lambert1、standardSurface1、particleCloud1")
         # </editor-fold>
 
         # <editor-fold desc="CODE_BLOCK: Connect Action">
@@ -48,8 +45,12 @@ class SetProjectDirectoryCSWidget(qt.QtFrameLayoutCSWidget):
         # </editor-fold>
 
         # <editor-fold desc="CODE_BLOCK: Assembly Widget">
-        scrollarea.layout.addWidget(box_sel_mats)
-        scrollarea.layout.addWidget(box_sel_mats_in_scene)
+        gbox_p_dir.layout.addWidget(tl_p_dir)
+        gbox_p_dir.layout.addWidget(btn_p_dir)
+        gbox_m_dir.layout.addWidget(tl_m_dir)
+        gbox_m_dir.layout.addWidget(btn_m_dir)
+        scrollarea.layout.addWidget(gbox_p_dir)
+        scrollarea.layout.addWidget(gbox_m_dir)
         layout.addWidget(scrollarea)
         widget.setLayout(layout)
         self.frame_layout.addWidget(widget)

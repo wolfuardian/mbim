@@ -14,6 +14,7 @@ class Tweak(ui_setup.Setup):
         self.act_reset.setShortcut("Shift+`")
 
         self.act_expand_all.triggered.connect(self.toggle_frame_widgets)
+        self.act_expand_all.setShortcut("Shift+1")
 
 
     def toggle_frame_widgets(self):

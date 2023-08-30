@@ -155,7 +155,7 @@ class QtButtonCSWidget(QtWidgets.QPushButton):
     ):
         super().__init__(parent)
 
-        font = QtGui.QFont(QtFonts.MingLiU, 8, QtGui.QFont.Bold)
+        font = QtGui.QFont(QtFonts.MingLiU, 8, QtGui.QFont.Normal)
         self.setFont(font)
 
         if icon:
@@ -246,7 +246,7 @@ class QtTabItemCSWidget(QtDefaultCSWidget):
 class QtScrollareaCSWidget(QtWidgets.QScrollArea):
     """Custom QScrollArea subclass"""
 
-    def __init__(self, parent=None, margin=(6, 6, 6, 6), spacing=6):
+    def __init__(self, parent=None, margin=(0, 0, 0, 0), spacing=6):
         super().__init__(parent)
         self.setWidgetResizable(True)
 
@@ -557,7 +557,7 @@ class QtGroupHBoxCSWidget(QtGroupBoxCSWidget):
         parent=None,
         flat=True,
         text=None,
-        margin=(12, 12, 12, 12),
+        margin=(6, 24, 6, 6),
         spacing=6,
         status=None,
     ):
@@ -600,7 +600,7 @@ class QtGroupVBoxCSWidget(QtGroupBoxCSWidget):
         parent=None,
         flat=True,
         text=None,
-        margin=(12, 12, 12, 12),
+        margin=(6, 24, 6, 6),
         spacing=6,
         status=None,
     ):
@@ -690,7 +690,7 @@ class QtTextLineCSWidget(QtDefaultCSWidget):
         lineedit.setReadOnly(readonly)
         lineedit.setPlaceholderText(">")
         lineedit_font = QtGui.QFont(QtFonts.MicrosoftJhengHei, 8, QtGui.QFont.Bold)
-        lineedit_font.setLetterSpacing(QtGui.QFont.PercentageSpacing, 95)
+        lineedit_font.setLetterSpacing(QtGui.QFont.PercentageSpacing, 100)
         lineedit.setFont(QtGui.QFont(lineedit_font))
         lineedit.setCursorPosition(0)
 
@@ -706,7 +706,7 @@ class QtTextLineCSWidget(QtDefaultCSWidget):
         self.layout = layout
         # --------------------------------------------
 
-        if use_label:
+        if use_label and text!="":
             self.label = QtLabelCSWidget()
             if text:
                 self.label.setText(text)
@@ -857,65 +857,68 @@ class QtLineEditStatus:
     Default = f"""
         QLineEdit {{
             background-color: {_hex("1d1d1d")};
-            border: 2px solid {_hex("636363")};
+            border: 2px solid {_hex("444444")};
             color: {_hex("B0B0B0")};
         }}
         QLineEdit:focus {{
-            border: 2px solid {_hex("B0B0B0")};
+            border: 2px solid {_hex("606060")};
+        }}
+        QLineEdit:hover {{
+            border: 2px solid {_hex("606060")};
         }}
     """
 
     Info = f"""
         QLineEdit {{
             background-color: {_hex("1d1d1d")};
-            border: 2px solid {_hex("1E90FF")};
+            border: 1px solid {_hex("1E90FF")};
             color: {_hex("A6D8FF")};
         }}
         QLineEdit:focus {{
-            border: 2px solid {_hex("A6D8FF")};
+            border: 1px solid {_hex("A6D8FF")};
         }}
     """
     Warning = f"""
         QLineEdit {{
             background-color: {_hex("1d1d1d")};
-            border: 2px solid {_hex("8E6D37")};
+            border: 1px solid {_hex("8E6D37")};
             color: {_hex("FFEB8A")};
         }}
         QLineEdit:focus {{
-            border: 2px solid {_hex("FFEB8A")};
+            border: 1px solid {_hex("FFEB8A")};
         }}
     """
 
     Error = f"""
         QLineEdit {{
             background-color: {_hex("1d1d1d")};
-            border: 2px solid {_hex("8E3B2E")};
+            border: 1px solid {_hex("8E3B2E")};
             color: {_hex("FF8F76")};
         }}
         QLineEdit:focus {{
-            border: 2px solid {_hex("FF8F76")};
+            border: 1px solid {_hex("FF8F76")};
         }}
     """
 
     Verified = f"""
         QLineEdit {{
             background-color: {_hex("1d1d1d")};
-            border: 2px solid {_hex("348E34")};
+            border: 1px solid {_hex("348E34")};
             color: {_hex("C5F2C5")};
         }}
         QLineEdit:focus {{
-            border: 2px solid {_hex("C5F2C5")};
+            border: 1px solid {_hex("C5F2C5")};
         }}
     """
 
     Disabled = f"""
         QLineEdit {{
             background-color: {_hex("1d1d1d")};
-            border: 2px solid {_hex("3c3c3c")};
+            border: 1px solid {_hex("3c3c3c")};
             color: {_hex("636363")};
         }}
         QLineEdit:focus {{
-            border: 2px solid {_hex("636363")};
+            border: 1px solid {_hex("636363")};
         }}
     """
 
@@ -961,9 +964,9 @@ class QtCheckBoxStatus:
 class QtButtonStatus:
     Default = f"""
             QPushButton {{
+                color: {_hex("bdbdbd")};
                 border: 2px solid {_hex("444444")};
-                background-color: {_hex("1E90FF")};
-                color: {_hex("333333")};
+                background-color: {_hex("525252")};
                 padding-left: 6px;
                 padding-right: 6px;
                 padding-top: 3px;
@@ -973,13 +976,10 @@ class QtButtonStatus:
             }}
 
             QPushButton:hover {{
-                background-color: {_hex("63b2ff")};
-                color: {_hex("333333")};
+                border: 2px solid {_hex("B0B0B0")};
             }}
-
             QPushButton:pressed {{
-                background-color: {_hex("333333")};
-                color: {_hex("1E90FF")};
+                background-color: {_hex("707070")};
             }}
         """
 
